@@ -1,0 +1,13 @@
+---
+const { post } = Astro.props;
+const { title, description, date, kategori } = post.data;
+const label = { tema: 'Tema', tutorial: 'Tutorial', forum: 'Forum' }[kategori];
+---
+<a href={`/blog/${post.id}/`} class="card card-link" data-text={`${title} ${description}`.toLowerCase()}>
+  <div class="meta">
+    <span class={`chip ${kategori}`}>{label}</span>
+    <time datetime={date.toISOString()}>{date.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</time>
+  </div>
+  <h3>{title}</h3>
+  <p>{description}</p>
+</a>
