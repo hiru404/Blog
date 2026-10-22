@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Forum" description="Forum diskusi terbuka untuk para blogger: tanya jawab dan berbagi modifikasi.">
+  <div class="prose">
+    <h1>Forum diskusi</h1>
+    <p>Tempat terbuka untuk tanya jawab kustomisasi Blogger. Masuk dengan akun GitHub untuk ikut berdiskusi.</p>
+    <div id="giscus"></div>
+    <!-- Isi data-repo dan id lain lewat https://giscus.app, lalu hapus komentar ini. -->
+    <script is:inline src="https://giscus.app/client.js"
+      data-repo="USERNAME/REPO"
+      data-repo-id="ISI_REPO_ID"
+      data-category="Forum"
+      data-category-id="ISI_CATEGORY_ID"
+      data-mapping="pathname"
+      data-reactions-enabled="1"
+      data-theme="preferred_color_scheme"
+      data-lang="id"
+      crossorigin="anonymous" async></script>
+  </div>
+</Base>

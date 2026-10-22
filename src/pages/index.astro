@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PostCard from '../components/PostCard.astro';
+const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const latest = posts.slice(0, 6);
+---
+<Base>
+  <h1 class="sr-only">Hiru404: eksperimen kustomisasi Blogger</h1>
+  <section class="bento" aria-label="Sorotan">
+    <div class="card hero">
+      <div>
+        <span class="chip tema">Repositori eksperimen</span>
+        <h2 style="font-size:clamp(1.9rem,6vw,3rem);margin-top:.75rem">Kustomisasi Blogger, dicoba sampai jalan.</h2>
+        <p style="margin-top:.75rem">Koleksi tema streaming anime & manga, tutorial modifikasi, dan forum diskusi terbuka untuk para blogger. Proyek pengisi waktu luang.</p>
+      </div>
+      <a class="btn" href="/blog/">Lihat semua artikel</a>
+    </div>
+    <a class="card card-link" href="/kategori/tema/">
+      <h3>Tema anime & manga</h3>
+      <p>Template Blogger siap pakai: kartu poster, slider, mode gelap.</p>
+    </a>
+    <a class="card card-link" href="/kategori/tutorial/">
+      <h3>Tutorial modifikasi</h3>
+      <p>Cara mengubah XML, CSS, dan widget Blogger langkah demi langkah.</p>
+    </a>
+    <a class="card card-link" href="/forum/" style="grid-column: span 1">
+      <h3>Forum terbuka</h3>
+      <p>Tanya, bagi hasil modifikasi, dan diskusi bareng blogger lain.</p>
+    </a>
+    <a class="card card-link" href="/rss.xml">
+      <h3>Ikuti lewat RSS</h3>
+      <p>Dapat kabar tema dan tutorial baru di pembaca feed.</p>
+    </a>
+  </section>
+
+  <section>
+    <h2 class="section-title">Artikel terbaru</h2>
+    {latest.length ? (
+      <div class="grid-posts">{latest.map((p) => <PostCard post={p} />)}</div>
+    ) : (
+      <p>Belum ada artikel. Tambahkan file .md di <code>src/content/blog</code>.</p>
+    )}
+  </section>
+</Base>
