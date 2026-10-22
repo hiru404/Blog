@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+export function getStaticPaths() {
+  return ['tema', 'tutorial', 'forum'].map((kategori) => ({ params: { kategori } }));
+}
+const { kategori } = Astro.params;
+const names = { tema: 'Tema', tutorial: 'Tutorial', forum: 'Forum' };
+const posts = (await getCollection('blog'))
+  .filter((p) => p.data.kategori === kategori)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<Base title={names[kategori]} description={`Artikel kategori ${names[kategori]} di Hiru404.`}>
+  <h1 class="section-title" style="font-size:1.6rem">{names[kategori]}</h1>
+  <div class="tabs">
+    <a href="/blog/">Semua</a>
+    {Object.entries(names).map(([k, v]) => <a href={`/kategori/${k}/`} aria-current={k === kategori ? 'page' : undefined}>{v}</a>)}
+  </div>
+  {posts.length ? <div class="grid-posts">{posts.map((p) => <PostCard post={p} />)}</div> : <p>Belum ada artikel di kategori ini.</p>}
+</Base>
