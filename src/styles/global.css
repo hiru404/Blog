@@ -1,0 +1,110 @@
+:root {
+  --bg: #f4f3fa;
+  --surface: #ffffff;
+  --muted: #ecebf5;
+  --hair: #dcdaea;
+  --fg: #1b1b3a;
+  --fg-muted: #5d5b7a;
+  --accent: #ffb020;
+  --accent-fg: #1b1b3a;
+  --accent-ink: #a85d00;
+  --shell: 72rem;
+}
+:root.dark {
+  --bg: #11112a;
+  --surface: #1b1b3a;
+  --muted: #26264c;
+  --hair: #34345e;
+  --fg: #f1f0fb;
+  --fg-muted: #a3a1c4;
+  --accent-ink: #ffb020;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: 6rem; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.6 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 3.75rem;
+}
+h1, h2, h3, .brand { font-family: 'Space Grotesk', system-ui, sans-serif; letter-spacing: -0.02em; line-height: 1.15; }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.shell { max-width: var(--shell); margin: 0 auto; padding: 0 1rem; width: 100%; }
+main { flex: 1; padding-block: 1.5rem 2rem; display: flex; flex-direction: column; gap: 2rem; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Header */
+.site-header { position: sticky; top: 0; z-index: 30; background: var(--surface); border-bottom: 1px solid var(--hair); }
+.site-header .shell { display: flex; align-items: center; gap: 1rem; height: 3.75rem; }
+.brand { font-weight: 700; font-size: 1.25rem; }
+.brand span { color: var(--accent-ink); }
+.nav-desktop { display: none; margin-left: 1rem; gap: .25rem; }
+.nav-desktop a { padding: .5rem .75rem; border-radius: 999px; font-size: .9rem; font-weight: 500; color: var(--fg-muted); }
+.nav-desktop a:hover { color: var(--fg); background: var(--muted); }
+.nav-desktop a[aria-current='page'] { color: var(--accent-fg); background: var(--accent); }
+.spacer { flex: 1; }
+.icon-btn { width: 2.5rem; height: 2.5rem; border-radius: .6rem; border: 0; background: transparent; color: var(--fg); cursor: pointer; display: grid; place-items: center; }
+.icon-btn:hover { background: var(--muted); }
+
+/* Tombol pill dengan isian saat hover */
+.btn { position: relative; z-index: 0; display: inline-flex; align-items: center; gap: .5rem; overflow: hidden; border: 1px solid var(--accent); border-radius: 999px; padding: .6rem 1.1rem; font-weight: 700; font-size: .85rem; color: var(--accent-ink); background: transparent; cursor: pointer; width: fit-content; }
+.btn::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--accent); transform: translateX(-101%); transition: transform .3s ease-out; }
+.btn:hover { color: var(--accent-fg); }
+.btn:hover::before { transform: translateX(0); }
+
+/* Bento + kartu */
+.bento { display: grid; gap: .75rem; grid-template-columns: 1fr; }
+.card { border: 1px solid var(--hair); border-radius: 1rem; background: var(--surface); padding: 1.1rem; display: flex; flex-direction: column; gap: .6rem; min-width: 0; }
+.card h2, .card h3 { margin: 0; }
+.card p { margin: 0; color: var(--fg-muted); font-size: .95rem; }
+.card-link:hover { border-color: var(--accent); }
+.hero h1 { font-size: clamp(1.9rem, 6vw, 3rem); margin: 0; }
+.hero { justify-content: space-between; min-height: 15rem; gap: 1rem; }
+.meta { font-size: .8rem; color: var(--fg-muted); display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.chip { border: 1px solid var(--hair); background: var(--muted); border-radius: 999px; padding: .1rem .6rem; font-size: .75rem; font-weight: 600; }
+.chip.tema { color: var(--accent-ink); border-color: var(--accent); }
+.section-title { font-size: 1.15rem; margin: 0 0 .75rem; }
+.grid-posts { display: grid; gap: .75rem; grid-template-columns: 1fr; }
+.search { width: 100%; height: 2.75rem; border-radius: 999px; border: 1px solid var(--hair); background: var(--muted); color: var(--fg); padding: 0 1.1rem; font: inherit; }
+.search::placeholder { color: var(--fg-muted); }
+.tabs { display: flex; gap: .4rem; flex-wrap: wrap; }
+.tabs a { border: 1px solid var(--hair); border-radius: 999px; padding: .35rem .9rem; font-size: .85rem; font-weight: 600; color: var(--fg-muted); }
+.tabs a[aria-current='page'] { background: var(--fg); color: var(--surface); border-color: var(--fg); }
+
+/* Artikel */
+.prose { max-width: 42rem; margin: 0 auto; width: 100%; }
+.prose h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); }
+.prose h2 { margin-top: 2rem; font-size: 1.4rem; }
+.prose p, .prose li { line-height: 1.75; }
+.prose a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; }
+.prose pre { background: #0d0d22; color: #e8e6ff; padding: 1rem; border-radius: .75rem; overflow-x: auto; font-size: .85rem; }
+.prose :not(pre) > code { background: var(--muted); padding: .1rem .35rem; border-radius: .3rem; font-size: .88em; }
+.prose img { max-width: 100%; border-radius: .75rem; }
+
+/* Footer */
+.site-footer { border-top: 1px solid var(--hair); background: var(--surface); margin-top: 1rem; padding: 1.5rem 0; color: var(--fg-muted); font-size: .9rem; }
+.site-footer .shell { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; }
+.site-footer nav { display: flex; gap: 1rem; flex-wrap: wrap; }
+.site-footer a:hover { color: var(--accent-ink); }
+
+/* Navbar bawah (HP) */
+.nav-bottom { position: fixed; inset: auto 0 0 0; z-index: 60; background: var(--surface); border-top: 1px solid var(--hair); display: flex; gap: .25rem; padding: .25rem .5rem calc(.25rem + env(safe-area-inset-bottom)); }
+.nav-bottom a { flex: 1; height: 2.75rem; display: grid; place-items: center; border-radius: 999px; font-size: .78rem; font-weight: 700; color: var(--fg-muted); }
+.nav-bottom a[aria-current='page'] { flex: 1.6; background: var(--accent); color: var(--accent-fg); }
+
+@media (min-width: 640px) { .grid-posts { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) {
+  .nav-desktop { display: flex; }
+  .nav-bottom { display: none; }
+  body { padding-bottom: 0; }
+  .bento { grid-template-columns: 1.5fr 1fr 1fr; }
+  .bento .hero { grid-row: span 2; }
+  .grid-posts { grid-template-columns: repeat(3, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) { .btn::before { transition: none; } }
